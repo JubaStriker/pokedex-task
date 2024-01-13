@@ -18,3 +18,10 @@ model Post {
 
     @@index([name])
 }
+
+model Pokemon {
+    id Int @id @default(autoincrement())
+    name String
+    types String[]
+    sprite String
+}
