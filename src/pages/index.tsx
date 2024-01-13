@@ -7,7 +7,7 @@ import Head from "next/head";
 
 import { api } from "~/utils/api";
 import styles from "./index.module.css";
-import { Button, Input } from "@mui/material";
+import { Button, ButtonGroup, Input } from "@mui/material";
 import { type TPokemon } from "~/server/api/routers/pokemon";
 import Swal from "sweetalert2";
 import { FormEvent, useState } from "react";
@@ -17,39 +17,11 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import PokedexTable from '~/components/PokedexTable';
+import Link from 'next/link';
 
 
 export default function Home() {
   const [name, setName] = useState('');
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setName(name);
-    const newPokemon: TPokemon = {
-      name: "Roaring Moon",
-      types: ["dark", "dragon"],
-      sprite: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/1005.png"
-    }
-    mutate(newPokemon)
-  }
-
-  const { mutate } = api.pokemon.createPokemon.useMutation({
-    onSuccess: (data) => {
-      // mutation succeeded 
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: `${data.name} added successfully`,
-        showConfirmButton: false,
-        timer: 1500
-      });
-      console.log(data);
-    },
-    onError: (err) => {
-      // mutation failed
-      console.log(err);
-    }
-  })
 
   return (
     <>
@@ -60,6 +32,19 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>Find Your Pokemon</h1>
+        <ButtonGroup
+          sx={{
+            marginTop: 4
+          }}
+          variant="text" aria-label="text button group">
+          <Link href={'/add'}>
+            <Button >Add Pokemons</Button>
+          </Link>
+          <Link href={'/all'}>
+            <Button >Show all Pokemons</Button>
+          </Link>
+        </ButtonGroup>
+
         <Grid container justifyContent="center" spacing={2} paddingTop={8}>
           <Grid item xs={6} md={5}>
             <Stack spacing={2} sx={{ width: 300 }}>
@@ -73,12 +58,9 @@ export default function Home() {
             }
           </Grid>
           <Grid item xs={6} md={5}>
-            <Stack spacing={2} sx={{ width: 300 }}>
-              <h3>Find with name of arrays</h3>
-              <PokedexTable />
 
-            </Stack>
-
+            <h3>Find with name of arrays</h3>
+            <PokedexTable />
           </Grid>
         </Grid>
 

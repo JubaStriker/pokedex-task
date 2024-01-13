@@ -48,7 +48,7 @@ export const pokemonRouter = createTRPCRouter({
         return pokemon;
     }),
 
-    getAPokemonByArray: publicProcedure.input(z.object({
+    getPokemonByArray: publicProcedure.input(z.object({
         filter: z.array(z.string()),
     })).query(async ({ ctx, input }) => {
         const pokemon = await ctx.prisma.pokemon.findMany(
