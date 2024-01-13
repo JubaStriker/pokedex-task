@@ -7,22 +7,26 @@ import styles from "./index.module.css";
 import { Button } from "@mui/material";
 import { type TPokemon } from "~/server/api/routers/pokemon";
 import Swal from "sweetalert2";
+import { FormEvent, useState } from "react";
+import PokemonRow from "~/components/PokemonRow";
 
 export default function Home() {
+  const [name, setName] = useState('');
   const hello = api.post.hello.useQuery({ text: "Hi", test: "New test field" });
-  const { data, isLoading } = api.pokemon.getPokemon.useQuery({
-    name: "Pickachu"
-  })
 
-  console.log(data, isLoading)
 
-  const handleSubmit = () => {
-    const newPokemon: TPokemon = {
-      name: "Pickachu",
-      types: ["electric"],
-      sprite: "https://static.wikia.nocookie.net/wii/images/8/89/Pikachu.jpg/revision/latest?cb=20140209205851"
-    }
-    mutate(newPokemon)
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setName(name);
+    // const newPokemon: TPokemon = {
+    //   name: "Pickachu",
+    //   types: ["electric"],
+    //   sprite: "https://static.wikia.nocookie.net/wii/images/8/89/Pikachu.jpg/revision/latest?cb=20140209205851"
+    // }
+    // mutate(newPokemon)
+
+
+
   }
 
   const { mutate } = api.pokemon.createPokemon.useMutation({
@@ -56,10 +60,17 @@ export default function Home() {
           <h1 className={styles.title}>
             Create <span className={styles.pinkSpan}>T3</span> App
           </h1>
-          <Button variant="contained" onClick={handleSubmit}>New Pokemon</Button>
+
           <p className={styles.showcaseText}>
             {hello.data?.test}
           </p>
+          <form onSubmit={handleSubmit}>
+            <input type="text" name='name' onChange={(e) => setName(e.target.value)} />
+            <Button variant="contained" type="submit">New Pokemon</Button>
+          </form>
+          {name.length > 0 &&
+            <PokemonRow name={name} />
+          }
         </div>
       </main>
     </>

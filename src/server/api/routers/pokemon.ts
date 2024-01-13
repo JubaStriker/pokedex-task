@@ -7,6 +7,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export type TPokemon = {
+    id?: number;
     name: string;
     types: string[];
     sprite: string;
@@ -34,7 +35,7 @@ export const pokemonRouter = createTRPCRouter({
     })).query(async ({ ctx, input }) => {
         const pokemon = await ctx.prisma.pokemon.findMany({
             where: {
-                name: input.name,
+                name: { contains: input.name },
             },
         });
         return pokemon;
