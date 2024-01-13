@@ -51,7 +51,8 @@ export default function Home() {
               <h3>Find with single name</h3>
               <TextField
                 type="text" name='name' onChange={(e) => setName(e.target.value)}
-                label="Pokemon name" variant="filled" color='primary' fullWidth />
+                label="Pokemon name" variant="filled" color='primary' fullWidth
+                helperText='Case sensitive*' />
             </Stack>
             {name.length > 0 &&
               <PokemonRow name={name} />

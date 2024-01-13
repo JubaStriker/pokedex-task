@@ -27,6 +27,9 @@ export default function Add() {
             sprite: image
         }
         mutate(newPokemon)
+        setName('')
+        setType('')
+        setImage('')
     }
 
     const { mutate } = api.pokemon.createPokemon.useMutation({
@@ -72,14 +75,21 @@ export default function Add() {
                     <form onSubmit={handleSubmit}>
                         <Stack spacing={2} sx={{ width: 300 }}>
                             <TextField
+                                required
                                 type="text" name='name' onChange={(e) => setName(e.target.value)}
-                                id="outlined-basic" label="Pokemon name" variant="outlined" color='primary' />
+                                id="outlined-basic" label="Pokemon name" variant="outlined" color='primary'
+                                value={name} />
                             <TextField
+                                required
                                 type="text" name='type' onChange={(e) => setType(e.target.value)}
-                                id="outlined-basic" label="Pokemon type" variant="outlined" color='primary' />
+                                id="outlined-basic" label="Pokemon type" variant="outlined" color='primary'
+                                value={type} />
                             <TextField
+                                required
                                 type="text" name='image' onChange={(e) => setImage(e.target.value)}
-                                id="outlined-basic" label="Pokemon image" variant="outlined" color='primary' />
+                                id="outlined-basic" label="Pokemon image" variant="outlined" color='primary'
+                                value={image}
+                                helperText='Please provide photo URL only' />
                         </Stack>
 
                         <Button

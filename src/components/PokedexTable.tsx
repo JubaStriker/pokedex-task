@@ -23,7 +23,7 @@ const PokedexTable = () => {
                 <TextField
                     type="text" name='name' onChange={(e) => setName(e.target.value)}
                     label="Pokemon names" variant="filled" color='primary' fullWidth
-                    helperText="i.e. Pokemon Bulbasaur Vulpix" />
+                    helperText="i.e. Pickachu Bulbasaur Vulpix" />
 
                 <Button
                     sx={{
