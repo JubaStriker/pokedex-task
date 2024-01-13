@@ -12,7 +12,6 @@ import Link from 'next/link';
 
 const All = () => {
     const { data } = api.pokemon.getAllPokemon.useQuery()
-    console.log(data);
     return (
         <>
             <Head>
