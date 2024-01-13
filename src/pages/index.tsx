@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 import Head from "next/head";
 
 import { api } from "~/utils/api";
 import styles from "./index.module.css";
-import { Button } from "@mui/material";
+import { Button, Input } from "@mui/material";
 import { type TPokemon } from "~/server/api/routers/pokemon";
 import Swal from "sweetalert2";
 import { FormEvent, useState } from "react";
@@ -12,21 +15,16 @@ import PokemonRow from "~/components/PokemonRow";
 
 export default function Home() {
   const [name, setName] = useState('');
-  const hello = api.post.hello.useQuery({ text: "Hi", test: "New test field" });
-
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setName(name);
-    // const newPokemon: TPokemon = {
-    //   name: "Pickachu",
-    //   types: ["electric"],
-    //   sprite: "https://static.wikia.nocookie.net/wii/images/8/89/Pikachu.jpg/revision/latest?cb=20140209205851"
-    // }
-    // mutate(newPokemon)
-
-
-
+    const newPokemon: TPokemon = {
+      name: "Roaring Moon",
+      types: ["dark", "dragon"],
+      sprite: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/1005.png"
+    }
+    mutate(newPokemon)
   }
 
   const { mutate } = api.pokemon.createPokemon.useMutation({
@@ -57,21 +55,18 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
-          <h1 className={styles.title}>
-            Create <span className={styles.pinkSpan}>T3</span> App
-          </h1>
-
-          <p className={styles.showcaseText}>
-            {hello.data?.test}
-          </p>
-          <form onSubmit={handleSubmit}>
-            <input type="text" name='name' onChange={(e) => setName(e.target.value)} />
-            <Button variant="contained" type="submit">New Pokemon</Button>
-          </form>
+          <Button variant="contained" onClick={handleSubmit}>Add Pokemon</Button>
+          <Stack spacing={2} sx={{ width: 300 }}>
+            <TextField
+              type="text" name='name' onChange={(e) => setName(e.target.value)}
+              id="outlined-basic" label="Pokemon name" variant="outlined" color='primary' />
+          </Stack>
           {name.length > 0 &&
             <PokemonRow name={name} />
           }
         </div>
+
+
       </main>
     </>
   );

@@ -14,6 +14,7 @@ export type TPokemon = {
 }
 
 export const pokemonRouter = createTRPCRouter({
+
     createPokemon: publicProcedure
         .input(z.object({
             name: z.string(),
@@ -30,6 +31,7 @@ export const pokemonRouter = createTRPCRouter({
             });
             return pokemon;
         }),
+
     getPokemon: publicProcedure.input(z.object({
         name: z.string(),
     })).query(async ({ ctx, input }) => {
