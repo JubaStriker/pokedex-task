@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { z } from "zod";
@@ -7,7 +8,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 type TPokemon = {
     name: string;
     types: string[];
-    sprites: string;
+    sprite: string;
 }
 
 export const pokemonRouter = createTRPCRouter({
@@ -22,9 +23,18 @@ export const pokemonRouter = createTRPCRouter({
                 data: {
                     name: input.name,
                     types: input.types,
-                    sprite: input.sprite,
+                    sprite: input.sprite
                 },
             });
             return pokemon;
+        }),
+    create: publicProcedure
+        .input(z.object({ name: z.string().min(1) }))
+        .mutation(async ({ ctx, input }) => {
+            return ctx.prisma.post.create({
+                data: {
+                    name: input.name,
+                },
+            });
         }),
 });
