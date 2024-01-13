@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { api } from "~/utils/api";
-import styles from "../pages/index.module.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';

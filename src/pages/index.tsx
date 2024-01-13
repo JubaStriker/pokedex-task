@@ -16,6 +16,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import PokedexTable from '~/components/PokedexTable';
 
 
 export default function Home() {
@@ -74,9 +75,8 @@ export default function Home() {
           <Grid item xs={6} md={5}>
             <Stack spacing={2} sx={{ width: 300 }}>
               <h3>Find with name of arrays</h3>
-              <TextField
-                type="text"
-                label="Pokemon name" variant="filled" color='primary' fullWidth />
+              <PokedexTable />
+
             </Stack>
 
           </Grid>
