@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -5,7 +6,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-type TPokemon = {
+export type TPokemon = {
     name: string;
     types: string[];
     sprite: string;
@@ -28,13 +29,14 @@ export const pokemonRouter = createTRPCRouter({
             });
             return pokemon;
         }),
-    create: publicProcedure
-        .input(z.object({ name: z.string().min(1) }))
-        .mutation(async ({ ctx, input }) => {
-            return ctx.prisma.post.create({
-                data: {
-                    name: input.name,
-                },
-            });
-        }),
+    getPokemon: publicProcedure.input(z.object({
+        name: z.string(),
+    })).query(async ({ ctx, input }) => {
+        const pokemon = await ctx.prisma.pokemon.findMany({
+            where: {
+                name: input.name,
+            },
+        });
+        return pokemon;
+    })
 });
