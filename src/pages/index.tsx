@@ -54,12 +54,12 @@ export default function Home() {
         <link rel="icon" href="/pokedex-icon.jpg" />
       </Head>
       <main className={styles.main}>
+        <h1 className={styles.title}>Find Your Pokemon</h1>
         <div className={styles.container}>
-          <Button variant="contained" onClick={handleSubmit}>Add Pokemon</Button>
           <Stack spacing={2} sx={{ width: 300 }}>
             <TextField
               type="text" name='name' onChange={(e) => setName(e.target.value)}
-              id="outlined-basic" label="Pokemon name" variant="outlined" color='primary' />
+              id="outlined-basic" label="Pokemon name" variant="outlined" color='warning' />
           </Stack>
           {name.length > 0 &&
             <PokemonRow name={name} />

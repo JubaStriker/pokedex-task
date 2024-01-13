@@ -25,7 +25,11 @@ const PokemonRow = (props: { name: string }) => {
                         display: 'flex',
                         gap: 5,
                         padding: 4,
-                        mt: 2
+                        mt: 2,
+                        '&:hover': {
+                            transform: 'scale(1.1)',
+                            transition: 'transform 0.2s ease',
+                        }
                     }}
                 >
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
