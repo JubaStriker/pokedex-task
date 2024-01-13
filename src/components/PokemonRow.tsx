@@ -69,6 +69,9 @@ const PokemonRow = (props: { name: string }) => {
                                     {type}
                                 </Typography>
                             )}
+                            <Typography component="div">
+                                Pokemon ID : {e.id}
+                            </Typography>
                         </CardContent>
 
                     </Box>
@@ -87,9 +90,3 @@ const PokemonRow = (props: { name: string }) => {
 };
 
 export default PokemonRow;
-
-
-// <h1
-
-// >
-//     {e.name ? e.name : "NOT FOUND"}</h1>

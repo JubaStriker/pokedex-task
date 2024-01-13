@@ -41,5 +41,12 @@ export const pokemonRouter = createTRPCRouter({
             },
         });
         return pokemon;
-    })
+    }),
+
+    getAllPokemon: publicProcedure.query(async ({ ctx }) => {
+        const pokemon = await ctx.prisma.pokemon.findMany();
+        return pokemon;
+    }),
+
+
 });

@@ -12,6 +12,11 @@ import { type TPokemon } from "~/server/api/routers/pokemon";
 import Swal from "sweetalert2";
 import { FormEvent, useState } from "react";
 import PokemonRow from "~/components/PokemonRow";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
 
 export default function Home() {
   const [name, setName] = useState('');
@@ -41,7 +46,6 @@ export default function Home() {
     },
     onError: (err) => {
       // mutation failed
-      console.log("Mutation failed ")
       console.log(err);
     }
   })
@@ -55,16 +59,29 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>Find Your Pokemon</h1>
-        <div className={styles.container}>
-          <Stack spacing={2} sx={{ width: 300 }}>
-            <TextField
-              type="text" name='name' onChange={(e) => setName(e.target.value)}
-              id="outlined-basic" label="Pokemon name" variant="outlined" color='warning' />
-          </Stack>
-          {name.length > 0 &&
-            <PokemonRow name={name} />
-          }
-        </div>
+        <Grid container justifyContent="center" spacing={2} paddingTop={8}>
+          <Grid item xs={6} md={5}>
+            <Stack spacing={2} sx={{ width: 300 }}>
+              <h3>Find with single name</h3>
+              <TextField
+                type="text" name='name' onChange={(e) => setName(e.target.value)}
+                label="Pokemon name" variant="filled" color='primary' fullWidth />
+            </Stack>
+            {name.length > 0 &&
+              <PokemonRow name={name} />
+            }
+          </Grid>
+          <Grid item xs={6} md={5}>
+            <Stack spacing={2} sx={{ width: 300 }}>
+              <h3>Find with name of arrays</h3>
+              <TextField
+                type="text"
+                label="Pokemon name" variant="filled" color='primary' fullWidth />
+            </Stack>
+
+          </Grid>
+        </Grid>
+
 
 
       </main>
