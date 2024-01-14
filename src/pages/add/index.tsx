@@ -46,6 +46,13 @@ export default function Add() {
         },
         onError: (err) => {
             // mutation failed
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: `$Something went wrong`,
+                showConfirmButton: false,
+                timer: 1500
+            });
             console.log(err);
         }
     })
