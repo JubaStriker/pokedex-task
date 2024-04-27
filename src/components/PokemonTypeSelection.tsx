@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Typography } from '@mui/material';
+import Select from '@mui/material/Select';
+import type { SelectChangeEvent } from '@mui/material/Select';
 
 type PokemonTypeSelectionProps = {
     selectedType: string | undefined;
@@ -20,7 +20,7 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({
 
 
     const handleChange = (event: SelectChangeEvent) => {
-        selectType(event.target.value as string);
+        selectType(event.target.value);
     };
 
     return (

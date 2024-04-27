@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Head from "next/head";
 import styles from "./index.module.css";
-import { Button, ButtonGroup, Typography } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 import { useState } from "react";
 import PokemonRow from "~/components/PokemonRow";
 import Grid from '@mui/material/Grid';
